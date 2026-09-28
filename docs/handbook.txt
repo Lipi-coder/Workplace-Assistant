@@ -1,0 +1,53 @@
+NorthStar Tech Employee Handbook (sample)
+
+Working hours: The standard working day is 9:30 AM to 6:30 PM, Monday to Friday. Employees may start between 8:30 and 10:30 AM if they complete nine hours.
+
+Leave policy: Every employee gets 12 days of casual leave and 10 days of sick leave per year. Casual leave must be requested at least two working days in advance. Unused casual leave can be carried over up to 5 days into the next year.
+
+Remote work: Employees may work from home up to two days per week with manager approval. Client-facing roles must be in the office on client meeting days.
+
+Notice period: The notice period for resignation is 60 days for permanent employees and 30 days during probation.
+
+Expense reimbursement: Travel and client-meal expenses are reimbursed within 15 working days when receipts are submitted through the finance portal within 30 days of the expense.
+
+Performance reviews: Reviews happen twice a year, in April and October.
+
+Review periods: Each review covers a half-year period. H1 is January to June and H2 is July to December. The October review covers H1 of the current year, and the April review covers H2 of the previous year.
+
+Rating scale: Performance ratings use a scale of 1 to 5. A rating of 1 means needs significant improvement, 2 means below expectations, 3 means meets expectations, 4 means exceeds expectations and 5 means outstanding. A rating of 3 is the normal result for a solid performer. An employee rated 2 or below gets a written improvement plan agreed with their manager for the next review period.
+
+Promotions: An employee is normally considered for promotion after at least 12 months in their current level and a rating of 4 or higher in two consecutive reviews. The manager proposes the promotion, the department head approves it, and HR confirms it after the October review.
+
+Probation: All new permanent employees serve a probation period of 6 months. A confirmation review is held in the last month of probation. Probation can be extended once, by up to 3 months, if performance has not yet reached the expected level.
+
+Job levels and reporting: Roles are grouped into four levels. Level 1 is the associate or junior level, level 2 is the mid level, level 3 is the senior level and level 4 is the manager level. Every department is led by a department head who sits above the managers. Employees report to a manager, managers report to their department head, and department heads report to the executive leadership team.
+
+Offices and departments: NorthStar Tech has eight departments: Engineering, Design, Sales, Marketing, HR, Finance, Operations and Customer Support. Offices are in Bengaluru, Mumbai, Delhi, Pune and Chennai. Each department is based at the office recorded for it in the HR system.
+
+Work modes: Every employee has a work mode recorded in the HR system: Office, Hybrid or Remote. Office employees work from their office on all working days. Hybrid employees may work from home up to two days a week, as set out in the remote work policy. Remote employees work from home full time. Remote mode is approved by the department head and is only given to roles that do not need to be on site. Remote employees visit their office at least once every quarter for team meetings.
+
+Changing work mode: A request to change work mode goes to the employee's manager and needs the department head's approval. HR updates the record within five working days after approval.
+
+Leave requests: All leave is requested through the HR portal. A new request has the status Pending. The manager marks it Approved or Rejected within three working days. A rejected request comes with a reason, and the employee may submit new dates. Approved leave can be cancelled by the employee up to one working day before it starts.
+
+Casual leave rules: A casual leave request covers 1 to 5 consecutive days. Casual leave longer than 5 days needs the department head's approval as well as the manager's. In the last week of December, leave is approved on a first-come basis, and managers may limit how many team members are away at the same time.
+
+Sick leave rules: Sick leave can be taken without advance notice, but the employee must inform their manager on the first day. For more than 3 consecutive days of sick leave, a medical certificate must be submitted to HR. Unused sick leave does not carry over into the next year.
+
+Public holidays: The company observes 12 public holidays a year. The list is published every December for the following year.
+
+Project statuses and roles: Work is organised into projects. A project has one of three statuses: Planned means it is approved but not started, Active means work is in progress, and Completed means the work is finished and closed. Every project has one Lead, who is accountable for delivery and reports progress to the department head. Other team members hold roles such as Developer, Tester, Analyst, Designer, Coordinator, Reviewer or Support.
+
+Project hours: Project hours are assigned per week for each team member. The total across all Active projects should not exceed 40 hours per week for any employee. Managers review allocations every month and must rebalance the work of anyone above 40 hours. An employee from another department can be assigned to a project only with the approval of both managers.
+
+Salary and pay: Salaries are paid on the last working day of each month, and payslips are available on the finance portal. Salary revisions are considered once a year after the April review and take effect from May. Sales roles also earn a quarterly incentive based on targets. Individual salary details are confidential and are shared only with the employee, their reporting managers, HR and Finance.
+
+Expense limits: Client meals are reimbursed up to INR 1,500 per person. Air travel is economy class, and hotel stays must be booked through the travel desk. Any single expense claim above INR 25,000 needs the department head's approval in addition to the manager's.
+
+Learning and development: Every employee gets up to 5 paid learning days a year for courses, conferences or certifications, approved by their manager. Course fees up to INR 30,000 per year are reimbursed with manager approval.
+
+Equipment and IT security: Every employee receives a company laptop. Passwords must not be shared and laptops must be locked when left unattended. A lost or stolen device must be reported to IT within 24 hours. Company data must not be stored on personal devices or sent to personal email accounts.
+
+Conduct and concerns: NorthStar Tech expects respectful behaviour from everyone. Concerns about harassment, discrimination or misconduct can be reported to HR, or to the department head if the concern involves the employee's own manager. Reports are handled confidentially, and retaliation against anyone who reports a concern in good faith is not allowed.
+
+Exit process: After resigning, an employee completes a handover plan with their manager and returns all company equipment on the last working day. The final settlement is paid within 30 days of the last working day.

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ask the workplace assistant</title>
+<style>
+:root{
+  --paper:#F5F7F8; --card:#FFFFFF; --ink:#1C2B33; --muted:#5E6E77; --rule:#D6DDE1;
+  --records:#3B4FBF; --records-bg:#EEF0FB;
+  --handbook:#0F7B6C; --handbook-bg:#E8F4F1;
+  --warn:#9A3B1F; --warn-bg:#FBEDE8;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#12191D; --card:#1A242A; --ink:#E6EDF0; --muted:#93A4AD; --rule:#2B3941;
+    --records:#8FA0FF; --records-bg:#1E2445;
+    --handbook:#4FD1BC; --handbook-bg:#13322D;
+    --warn:#F2A48B; --warn-bg:#3A1F16;
+  }
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font:16px/1.55 system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  display:flex;flex-direction:column}
+header{padding:18px 20px 12px;border-bottom:1px solid var(--rule)}
+.wrap{max-width:720px;margin:0 auto;width:100%}
+h1{font-size:1.25rem;margin:0;font-weight:650;letter-spacing:-.01em}
+header p{margin:2px 0 0;color:var(--muted);font-size:.9rem}
+main{flex:1;overflow-y:auto;padding:20px}
+#empty h2{font-size:1.05rem;margin:8px 0 4px}
+#empty p{margin:0 0 16px;color:var(--muted)}
+.group{margin:0 0 18px}
+.group h3{font-size:.9rem;margin:0 0 8px;font-weight:600}
+.group.records h3{color:var(--records)}
+.group.handbook h3{color:var(--handbook)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:inherit;font-size:.92rem;text-align:left;cursor:pointer;
+  padding:8px 12px;border-radius:8px;border:1px solid var(--rule);background:var(--card);color:var(--ink)}
+.group.records .chip{border-left:4px solid var(--records)}
+.group.handbook .chip{border-left:4px solid var(--handbook)}
+.chip:hover{background:var(--paper)}
+.msg{margin:0 0 16px}
+.msg.user{display:flex;justify-content:flex-end}
+.msg.user .bubble{max-width:85%;background:var(--ink);color:var(--paper);
+  padding:9px 14px;border-radius:14px 14px 4px 14px;white-space:pre-wrap;word-wrap:break-word}
+.msg.bot{background:var(--card);border:1px solid var(--rule);border-left-width:5px;
+  border-radius:4px 12px 12px 4px;padding:12px 16px}
+.msg.bot.sql{border-left-color:var(--records)}
+.msg.bot.docs{border-left-color:var(--handbook)}
+.msg.bot.error{border-left-color:var(--warn);background:var(--warn-bg)}
+.tag{font-size:.85rem;font-weight:600;margin-bottom:4px}
+.sql .tag{color:var(--records)}
+.docs .tag{color:var(--handbook)}
+.error .tag{color:var(--warn)}
+.text p{margin:0 0 8px}
+.text p:last-child{margin-bottom:0}
+.text ul{margin:0 0 8px;padding-left:20px}
+.detail{margin-top:10px;font-size:.88rem;color:var(--muted)}
+.detail summary{cursor:pointer}
+.detail pre{margin:8px 0 0;padding:10px 12px;background:var(--paper);border:1px solid var(--rule);
+  border-radius:8px;overflow-x:auto;color:var(--ink);font:.85rem/1.45 ui-monospace,Consolas,monospace}
+.pending{color:var(--muted)}
+form{border-top:1px solid var(--rule);padding:12px 20px;background:var(--card)}
+.row{display:flex;gap:8px}
+input[type=text]{flex:1;min-width:0;font:inherit;padding:11px 14px;border-radius:10px;
+  border:1px solid var(--rule);background:var(--paper);color:var(--ink)}
+button.send{font:inherit;font-weight:600;padding:0 20px;border-radius:10px;border:0;
+  background:var(--ink);color:var(--paper);cursor:pointer}
+button.send:disabled{opacity:.5;cursor:not-allowed}
+:focus-visible{outline:3px solid var(--records);outline-offset:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (max-width:520px){ main{padding:14px} header,form{padding-left:14px;padding-right:14px} }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Ask the workplace assistant</h1>
+    <p>Answers come from the employee database or the company handbook, and each answer says which.</p>
+  </div>
+</header>
+
+<main id="scroll">
+  <div class="wrap">
+    <section id="empty">
+      <h2>Ask about people or policies</h2>
+      <p>Pick a question to try, or type your own below.</p>
+      <div class="group records">
+        <h3>Employee records</h3>
+        <div class="chips">
+          <button class="chip" type="button">How many employees are there in total?</button>
+          <button class="chip" type="button">List the names of all employees.</button>
+        </div>
+      </div>
+      <div class="group handbook">
+        <h3>Company handbook</h3>
+        <div class="chips">
+          <button class="chip" type="button">How many days of casual leave do employees get?</button>
+          <button class="chip" type="button">Can I work from home on Fridays?</button>
+          <button class="chip" type="button">What is the notice period for permanent employees?</button>
+        </div>
+      </div>
+    </section>
+    <div id="log" aria-live="polite"></div>
+  </div>
+</main>
+
+<form id="form">
+  <div class="wrap row">
+    <label class="sr" for="q">Your question</label>
+    <input id="q" type="text" autocomplete="off" placeholder="Ask about employees or company policy">
+    <button class="send" id="send" type="submit">Ask</button>
+  </div>
+</form>
+
+<script>
+const log = document.getElementById('log');
+const form = document.getElementById('form');
+const input = document.getElementById('q');
+const sendBtn = document.getElementById('send');
+const scroller = document.getElementById('scroll');
+
+const LABELS = { sql: 'Employee records', docs: 'Company handbook', none: 'Limit reached' };
+
+function esc(s){
+  return s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+}
+function inline(s){ return s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>'); }
+function format(text){
+  let html = '', inList = false;
+  for (const line of esc(text).split('\n')) {
+    const m = line.match(/^\s*[-*]\s+(.*)/);
+    if (m) {
+      if (!inList) { html += '<ul>'; inList = true; }
+      html += '<li>' + inline(m[1]) + '</li>';
+    } else {
+      if (inList) { html += '</ul>'; inList = false; }
+      if (line.trim()) html += '<p>' + inline(line) + '</p>';
+    }
+  }
+  if (inList) html += '</ul>';
+  return html;
+}
+function scrollDown(){ scroller.scrollTop = scroller.scrollHeight; }
+
+function addUser(text){
+  const d = document.createElement('div');
+  d.className = 'msg user';
+  const b = document.createElement('div');
+  b.className = 'bubble';
+  b.textContent = text;
+  d.appendChild(b);
+  log.appendChild(d);
+  scrollDown();
+}
+function addPending(){
+  const d = document.createElement('div');
+  d.className = 'msg bot pending';
+  d.textContent = 'Looking this up\u2026';
+  log.appendChild(d);
+  scrollDown();
+  return d;
+}
+function fill(el, kind, label, answer, extra){
+  el.className = 'msg bot ' + kind;
+  el.innerHTML = '<div class="tag">' + esc(label) + '</div><div class="text">' + format(answer) + '</div>' + (extra || '');
+  scrollDown();
+}
+
+async function ask(question){
+  question = question.trim();
+  if (!question) return;
+  const empty = document.getElementById('empty');
+  if (empty) empty.remove();
+  addUser(question);
+  const pending = addPending();
+  sendBtn.disabled = true;
+  input.value = '';
+  try {
+    const res = await fetch('/api/ask', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ question })
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      let detail = data.detail;
+      if (Array.isArray(detail)) detail = detail.map(d => d.msg).join('; ');
+      fill(pending, 'error', 'Request failed',
+        'The server returned status ' + res.status + '. ' + (detail || 'Check the server terminal for details.'));
+    } else {
+      let extra = '';
+      if (data.route === 'sql' && data.query_executed) {
+        extra = '<details class="detail"><summary>See the SQL that was run</summary><pre>' + esc(data.query_executed) + '</pre></details>';
+      } else if (data.route === 'docs' && data.sources && data.sources.length) {
+        extra = '<div class="detail">Source: ' + data.sources.map(esc).join(', ') + '</div>';
+      }
+      const kind = data.route === 'sql' || data.route === 'docs' ? data.route : 'error';
+      fill(pending, kind, LABELS[data.route] || 'Answer', data.answer, extra);
+    }
+  } catch (err) {
+    fill(pending, 'error', 'No connection',
+      'Could not reach the server. Check that uvicorn is running, then try again.');
+  } finally {
+    sendBtn.disabled = false;
+    input.focus();
+  }
+}
+
+form.addEventListener('submit', e => { e.preventDefault(); ask(input.value); });
+document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => ask(c.textContent)));
+input.focus();
+</script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+langchain
+langchain-core
+langchain-community
+langgraph
+python-dotenv
+SQLAlchemy
+fastapi
+uvicorn
+langchain-groq
+psycopg2-binary
